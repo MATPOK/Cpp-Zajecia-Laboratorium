@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <cstring>
 
 class Napis {
 private:
@@ -25,4 +26,12 @@ public:
     void Wypisz() const;
     void Wpisz();
     int SprawdzNapis(const char* por_napis) const;
+
+	bool operator==(const Napis& wzor) const;
+    void operator+=(const char* n);
+
+	friend std::ostream& operator<<(std::ostream& wy, const Napis& p);
+	friend std::istream& operator>>(std::istream& we, Napis& p);
 };
+std::ostream& operator<<(std::ostream& wy, const Napis& p);
+std::istream& operator>>(std::istream& we, Napis& p);

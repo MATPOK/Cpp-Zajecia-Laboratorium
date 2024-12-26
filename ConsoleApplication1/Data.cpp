@@ -1,5 +1,4 @@
 #include "Data.h"
-#include <iostream>
 
 using namespace std;
 
@@ -124,6 +123,15 @@ int Data::Porownaj(const Data& wzor) const
     return -1;
 }
 
+ostream& operator<<(ostream& wy, const Data& d)
+{
+    return wy << d.m_nDzien << '-' << d.m_nMiesiac << '-' << d.m_nRok;
+}
 
-
-
+std::istream& operator>>(std::istream& we, Data& d)
+{
+	int dd, mm, rr;
+	we >> dd >> mm >> rr;
+	d.Ustaw(dd, mm, rr);
+    return we;
+}

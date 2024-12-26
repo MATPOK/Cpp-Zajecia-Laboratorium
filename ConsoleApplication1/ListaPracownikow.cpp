@@ -1,6 +1,5 @@
 #include "ListaPracownikow.h"
-#include <iostream>
-#include <cstring>
+
 
 // Konstruktor domyślny inicjalizujący pustą listę
 ListaPracownikow::ListaPracownikow()
@@ -122,3 +121,48 @@ const Pracownik *ListaPracownikow::Szukaj(const char *nazwisko, const char *imie
     }
     return nullptr; // Jeśli pracownika nie ma, zwraca `nullptr`
 }
+
+void ListaPracownikow::ZapiszDoPliku(const char* nazwaPliku) const
+{
+	std::ofstream plik(nazwaPliku); 
+	if (plik.is_open())            
+	{
+		Pracownik* p = m_pPoczatek;
+		while (p != nullptr) 
+		{
+			plik << *p <<'\n';
+			p = p->m_pNastepny; 
+		}
+		plik.close(); 
+        std::cout << "Pomyslnie zapisano liste pracownikow do pliku\n";
+	}
+	else
+	{
+		std::cerr << "Nie udalo sie otworzyc pliku " << nazwaPliku << std::endl;
+	}
+}
+
+void ListaPracownikow::OdczytZPliku(const char* nazwaPliku)
+{
+    std::ifstream plik(nazwaPliku);
+    if (plik.is_open())
+    {
+        Pracownik p;
+        while (plik >> p)
+        {  
+			    Pracownik nowy(p, false);
+                Dodaj(nowy);
+				m_nLiczbaPracownikow++;
+        }
+        plik.close();
+        std::cout << "Pomyslnie wczytano liste pracownikow z pliku\n";
+    }
+    else
+    {
+        std::cerr << "Nie udalo sie otworzyc pliku " << nazwaPliku << std::endl;
+    }
+}
+
+
+
+

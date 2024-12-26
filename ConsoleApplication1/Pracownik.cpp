@@ -1,6 +1,6 @@
 #include "Pracownik.h"
-#include "Data.h"
-#include <iostream>
+
+
 
 using namespace std;
 
@@ -66,8 +66,9 @@ void Pracownik::Wpisz()
 	m_Imie.Wpisz();
 	cout << "Podaj nazwisko: ";
 	m_Nazwisko.Wpisz();
-	cout << "Podaj date urodzenia: ";
+	cout << "Podaj date urodzenia (dd mm rrrr): ";
 	m_DataUrodzenia.Wpisz();
+	cin.ignore();
 }
 
 int Pracownik::SprawdzImie(const char* por_imie) const
@@ -95,5 +96,28 @@ int Pracownik::Porownaj(const Pracownik& wzorzec) const
 		return wynik;
 	}
 }
+bool Pracownik::operator==(const Pracownik& wzor) const
+{
+	if (this->SprawdzImie(wzor.Imie()) == 0 && this->SprawdzNazwisko(wzor.Nazwisko()) == 0 && m_DataUrodzenia.Porownaj(wzor.m_DataUrodzenia) == 0)
+	{
+		return true;
+	}else
+		return false;
+}
 int Pracownik::m_NastepneID = 1;
 
+std::ostream& operator<<(std::ostream& wy, const Pracownik& p)
+{ 
+	wy << p.m_Imie << " " << p.m_Nazwisko << " " << p.m_DataUrodzenia << " ID: " << p.m_nIDZatrudnienia;
+	return wy;
+}
+
+std::istream& operator>>(std::istream& we, Pracownik& p)
+{
+
+	we >> p.m_Imie;
+	we >> p.m_Nazwisko;
+	we >> p.m_DataUrodzenia;
+	we.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	return we;
+}

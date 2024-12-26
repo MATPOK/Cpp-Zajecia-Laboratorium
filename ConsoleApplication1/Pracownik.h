@@ -1,6 +1,7 @@
 #pragma once
 #include "Napis.h"
 #include "Data.h"
+#include <iostream>
 
 class Pracownik
 {
@@ -33,5 +34,12 @@ public:
 	int SprawdzNazwisko(const char* por_nazwisko) const;
 	int Porownaj(const Pracownik& wzorzec) const;
 
+	bool operator==(const Pracownik& wzor) const;
+
+	friend std::ostream& operator<<(std::ostream& wy, const Pracownik& p);
+	friend std::istream& operator>>(std::istream& we, Pracownik& p);
 };
+std::ostream& operator<<(std::ostream& wy, const Pracownik& p);
+std::istream& operator>>(std::istream& we, Pracownik& p);
+
 

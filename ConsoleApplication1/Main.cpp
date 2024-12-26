@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ListaPracownikow.h"
 
+
 // Wyświetla menu użytkownika
 void WyswietlMenu()
 {
@@ -9,7 +10,9 @@ void WyswietlMenu()
     std::cout << "b) Usun pracownika\n";
     std::cout << "c) Wypisz cala liste pracownikow\n";
     std::cout << "d) Wyszukaj pracownika po nazwisku i imieniu\n";
-    std::cout << "e) Wyjdz\n";
+    std::cout << "e) Zapisz pracownikow w pliku\n";
+    std::cout << "f) Wczytaj pracownikow z pliku\n";
+    std::cout << "g) Wyjdz\n";
     std::cout << "Twoj wybor: ";
 }
 
@@ -19,6 +22,7 @@ int main()
 {
     ListaPracownikow lista; // Tworzy listę pracowników
     char wybor;
+	char nazwaPliku[40] = "Pracownicy.txt";
 
     do
     {
@@ -70,13 +74,24 @@ int main()
             }
             break;
         }
-        case 'e': // Wyjście z programu
+        case 'e': // Zapis pracowników do pliku
+        {
+			lista.ZapiszDoPliku(nazwaPliku);
+            break;
+        }
+		case 'f': // Odczyt pracowników z pliku
+        {
+            lista.OdczytZPliku(nazwaPliku);
+            break;
+        }
+        case 'g': // Wyjście z programu
             std::cout << "Koniec programu.\n";
             break;
         default:
             std::cout << "Nieznana opcja. Sprobuj ponownie.\n";
         }
-    } while (wybor != 'e'); // Powtarza pętlę, dopóki użytkownik nie wybierze wyjścia
+    } while (wybor != 'g'); // Powtarza pętlę, dopóki użytkownik nie wybierze wyjścia
 
     return 0; // Zakończenie programu
 }
+

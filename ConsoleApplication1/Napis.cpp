@@ -1,5 +1,5 @@
 #include "Napis.h"
-#include <cstring>
+
 
 using namespace std;
 
@@ -72,4 +72,54 @@ void Napis::Wpisz() {
 
 int Napis::SprawdzNapis(const char* por_napis) const {
     return strcmp(m_pszNapis, por_napis);
+}
+
+void Napis::operator+=(const char* n)
+{
+    if (n == nullptr || *n == '\0')return;
+    if (m_pszNapis == nullptr)
+    {
+        m_nDl = strlen(n);
+        m_pszNapis = new char[m_nDl + 1];
+        strcpy(m_pszNapis, n);
+    }
+    else
+    {
+        m_nDl += strlen(n);
+        char* ns = new char[m_nDl + 1];
+        strcpy(ns, m_pszNapis);
+        strcat(ns, n);
+        delete[]m_pszNapis;
+        m_pszNapis = ns;
+    }
+}
+
+bool Napis::operator==(const Napis& wzor) const
+{
+	if (strcmp(m_pszNapis, wzor.Zwroc()) == 0)
+		return true;
+	else
+		return false;
+}
+
+std::ostream& operator<<(std::ostream& wy, const Napis& p)
+{
+    return wy << p.m_pszNapis << endl;
+}
+
+std::istream& operator>>(std::istream& we, Napis& p)
+{
+    char pom[40];
+    we.get(pom, 40);
+    p.Ustaw(pom);
+
+    while (we && we.peek() != '\n')
+    {
+        we.get(pom, 40);
+        p += pom;
+    }
+    we.get(); // '\n'
+
+
+    return we;
 }

@@ -1,5 +1,8 @@
 #pragma once
 #include "pracownik.h"
+#include<fstream>
+#include <iostream>
+#include <cstring>
 
 class ListaPracownikow
 {
@@ -25,4 +28,9 @@ public:
 
     // Wyszukuje pracownika na podstawie nazwiska i imienia
     const Pracownik *Szukaj(const char *nazwisko, const char *imie) const;
+
+	//Zapisuje pracowników do pliku
+	void ZapiszDoPliku(const char* nazwaPliku) const;
+	// Wczytuje pracowników z pliku
+    void OdczytZPliku(const char* nazwaPliku);
 };
