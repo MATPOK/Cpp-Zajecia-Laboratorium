@@ -1,7 +1,6 @@
 #include "Pracownik.h"
 
 
-
 using namespace std;
 
 Pracownik::Pracownik(const char* im, const char* naz, int dzien, int miesi¹c, int rok) : m_Imie(im), m_Nazwisko(naz), m_DataUrodzenia(dzien, miesi¹c, rok), m_nIDZatrudnienia(m_NastepneID++)
@@ -127,13 +126,15 @@ bool Pracownik::operator==(const Pracownik& wzor) const
 }
 int Pracownik::m_NastepneID = 1;
 
-std::ostream& operator<<(std::ostream& wy, const Pracownik& p)
+ostream& operator<<(ostream& wy, const Pracownik& p)
 { 
-	wy << p.m_Imie << " " << p.m_Nazwisko << " " << p.m_DataUrodzenia << " ID: " << p.m_nIDZatrudnienia;
+	//do zrobienia
+	wy << static_cast<const Pracownik&>(p); // Wywo³anie operatora dla klasy bazowej
+	wy << " Departament: " << p.m_;
 	return wy;
 }
 
-std::istream& operator>>(std::istream& we, Pracownik& p)
+istream& operator>>(istream& we, Pracownik& p)
 {
 
 	we >> p.m_Imie;

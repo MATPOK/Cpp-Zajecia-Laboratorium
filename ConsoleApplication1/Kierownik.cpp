@@ -43,7 +43,8 @@ Pracownik* Kierownik::KopiaObiektu() const
 
 ostream& operator<<(ostream& wy, const Kierownik& s)
 {
-	//TODO
+	
+	return wy;
 }
 
 istream& operator>>(istream& we, Kierownik& s)

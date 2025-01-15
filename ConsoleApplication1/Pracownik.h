@@ -3,6 +3,8 @@
 #include "Data.h"
 #include <iostream>
 
+using namespace std;
+
 class Pracownik
 {
 	Napis m_Imie;
@@ -40,10 +42,10 @@ public:
 
 	bool operator==(const Pracownik& wzor) const;
 
-	friend std::ostream& operator<<(std::ostream& wy, const Pracownik& p);
-	friend std::istream& operator>>(std::istream& we, Pracownik& p);
+	friend ostream& operator<<(ostream& wy, const Pracownik& p);
+	friend istream& operator>>(istream& we, Pracownik& p);
 };
-std::ostream& operator<<(std::ostream& wy, const Pracownik& p);
-std::istream& operator>>(std::istream& we, Pracownik& p);
+ostream& operator<<(ostream& wy, const Pracownik& p);
+istream& operator>>(istream& we, Pracownik& p);
 
 
