@@ -96,6 +96,27 @@ int Pracownik::Porownaj(const Pracownik& wzorzec) const
 		return wynik;
 	}
 }
+void Pracownik::WypiszDane()
+{
+	m_Imie.Wypisz();
+	cout << " ";
+	m_Nazwisko.Wypisz();
+	cout << " ";
+	m_DataUrodzenia.Wypisz();
+	cout << " ID: " << m_nIDZatrudnienia;
+	cout << endl;
+}
+Pracownik* Pracownik::KopiaObiektu() const
+{
+	Data data = this->m_DataUrodzenia;
+	int m_nDzien = data.InfoDzien();
+	int m_nMiesiac = data.InfoMiesiac();
+	int m_nRok = data.InfoRok();
+	return new Pracownik(this->Imie(), this->Nazwisko(), m_nDzien, m_nMiesiac, m_nRok);
+}
+Pracownik::~Pracownik()
+{
+}
 bool Pracownik::operator==(const Pracownik& wzor) const
 {
 	if (this->SprawdzImie(wzor.Imie()) == 0 && this->SprawdzNazwisko(wzor.Nazwisko()) == 0 && m_DataUrodzenia.Porownaj(wzor.m_DataUrodzenia) == 0)

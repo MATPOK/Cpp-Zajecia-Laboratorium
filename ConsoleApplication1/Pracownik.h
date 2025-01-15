@@ -34,6 +34,10 @@ public:
 	int SprawdzNazwisko(const char* por_nazwisko) const;
 	int Porownaj(const Pracownik& wzorzec) const;
 
+	virtual void WypiszDane();
+	virtual Pracownik* KopiaObiektu() const;
+	virtual ~Pracownik();
+
 	bool operator==(const Pracownik& wzor) const;
 
 	friend std::ostream& operator<<(std::ostream& wy, const Pracownik& p);
