@@ -11,10 +11,10 @@ ListaPracownikow::ListaPracownikow()
 // Destruktor zwalniający pamięć
 ListaPracownikow::~ListaPracownikow()
 {
-    Pracownik *usun = m_pPoczatek; // Zaczyna od pierwszego elementu
+    Pracownik* usun = m_pPoczatek; // Zaczyna od pierwszego elementu
     while (usun != nullptr)        // Dopóki lista nie jest pusta
     {
-        Pracownik *next = usun->m_pNastepny; // Zapamiętuje wskaźnik na następny element
+        Pracownik* next = usun->m_pNastepny; // Zapamiętuje wskaźnik na następny element
         delete usun;                         // Usuwa bieżący element
         m_nLiczbaPracownikow--;              // Zmniejsza licznik pracowników
         usun = next;                         // Przechodzi do kolejnego elementu
@@ -22,10 +22,10 @@ ListaPracownikow::~ListaPracownikow()
 }
 
 // Dodaje pracownika do listy
-void ListaPracownikow::Dodaj(const Pracownik &p)
+void ListaPracownikow::Dodaj(const Pracownik& p)
 {
     bool wasFoundInList = false;
-    Pracownik *test = m_pPoczatek;
+    Pracownik* test = m_pPoczatek;
 
     // Sprawdza, czy pracownik już istnieje w liście
     while (test != nullptr)
@@ -41,7 +41,7 @@ void ListaPracownikow::Dodaj(const Pracownik &p)
     // Jeśli pracownika nie ma na liście, dodaje go
     if (!wasFoundInList)
     {
-        Pracownik *nowy = new Pracownik(p, true); // Tworzy nowego pracownika
+        Pracownik* nowy = new Pracownik(p, true); // Tworzy nowego pracownika
         nowy->m_pNastepny = nullptr;       // Ustawia `nullptr` jako następny element
         nowy->m_pPoprzedni = nullptr;       // Ustawia `nullptr` jako poprzedni element
         if (m_nLiczbaPracownikow == 0)     // Jeśli lista jest pusta
@@ -50,7 +50,7 @@ void ListaPracownikow::Dodaj(const Pracownik &p)
         }
         else
         {
-            Pracownik *last = m_pPoczatek;
+            Pracownik* last = m_pPoczatek;
             while (last->m_pNastepny != nullptr) // Znajduje ostatni element listy
             {
                 last = last->m_pNastepny;
@@ -63,15 +63,15 @@ void ListaPracownikow::Dodaj(const Pracownik &p)
 }
 
 // Usuwa pracownika z listy
-void ListaPracownikow::Usun(const Pracownik &wzorzec)
+void ListaPracownikow::Usun(const Pracownik& wzorzec)
 {
-    Pracownik *test = m_pPoczatek;
+    Pracownik* test = m_pPoczatek;
     while (test != nullptr) // Przechodzi przez całą listę
     {
         if (test->Porownaj(wzorzec) == 0) // Szuka pracownika do usunięcia
         {
-            Pracownik *next = test->m_pNastepny;
-            Pracownik *prev = test->m_pPoprzedni;
+            Pracownik* next = test->m_pNastepny;
+            Pracownik* prev = test->m_pPoprzedni;
             if (test == m_pPoczatek)
                 m_pPoczatek = next; // Jeśli to pierwszy element, przesuwa początek
             if (prev)
@@ -95,8 +95,8 @@ void ListaPracownikow::WypiszPracownikow() const
         return;
     }
 
-    Pracownik *p = m_pPoczatek;
-    int i = 0;
+    Pracownik* p = m_pPoczatek;
+    int i = 1;
     while (p != nullptr) // Przechodzi przez listę
     {
         std::cout << i << "\t"; // Wyświetla indeks
@@ -108,9 +108,9 @@ void ListaPracownikow::WypiszPracownikow() const
 }
 
 // Szuka pracownika na podstawie nazwiska i imienia
-const Pracownik *ListaPracownikow::Szukaj(const char *nazwisko, const char *imie) const
+const Pracownik* ListaPracownikow::Szukaj(const char* nazwisko, const char* imie) const
 {
-    Pracownik *test = m_pPoczatek;
+    Pracownik* test = m_pPoczatek;
     while (test != nullptr) // Przechodzi przez listę
     {
         if (strcmp(test->Nazwisko(), nazwisko) == 0 && strcmp(test->Imie(), imie) == 0)
@@ -124,22 +124,22 @@ const Pracownik *ListaPracownikow::Szukaj(const char *nazwisko, const char *imie
 
 void ListaPracownikow::ZapiszDoPliku(const char* nazwaPliku) const
 {
-	std::ofstream plik(nazwaPliku); 
-	if (plik.is_open())            
-	{
-		Pracownik* p = m_pPoczatek;
-		while (p != nullptr) 
-		{
-			plik << *p <<'\n';
-			p = p->m_pNastepny; 
-		}
-		plik.close(); 
+    std::ofstream plik(nazwaPliku);
+    if (plik.is_open())
+    {
+        Pracownik* p = m_pPoczatek;
+        while (p != nullptr)
+        {
+            plik << *p << "\n";
+            p = p->m_pNastepny;
+        }
+        plik.close();
         std::cout << "Pomyslnie zapisano liste pracownikow do pliku\n";
-	}
-	else
-	{
-		std::cerr << "Nie udalo sie otworzyc pliku " << nazwaPliku << std::endl;
-	}
+    }
+    else
+    {
+        std::cerr << "Nie udalo sie otworzyc pliku " << nazwaPliku << std::endl;
+    }
 }
 
 void ListaPracownikow::OdczytZPliku(const char* nazwaPliku)
@@ -149,10 +149,10 @@ void ListaPracownikow::OdczytZPliku(const char* nazwaPliku)
     {
         Pracownik p;
         while (plik >> p)
-        {  
-			    Pracownik nowy(p, false);
-                Dodaj(nowy);
-				m_nLiczbaPracownikow++;
+        {
+            Pracownik nowy(p, false);
+            Dodaj(nowy);
+            m_nLiczbaPracownikow++;
         }
         plik.close();
         std::cout << "Pomyslnie wczytano liste pracownikow z pliku\n";
@@ -162,7 +162,3 @@ void ListaPracownikow::OdczytZPliku(const char* nazwaPliku)
         std::cerr << "Nie udalo sie otworzyc pliku " << nazwaPliku << std::endl;
     }
 }
-
-
-
-

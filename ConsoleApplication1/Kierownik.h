@@ -18,12 +18,12 @@ public:
 	bool operator==(const Kierownik& wzor) const;
 
 	virtual void WypiszDane() override;
-	virtual Pracownik* KopiaObiektu()const override;
+	//virtual Pracownik* KopiaObiektu()const override;
 
 
 	friend ostream& operator<<(ostream& wy, const Pracownik& p);
 	friend istream& operator>>(istream& we, Pracownik& p);
 };
 ostream& operator<<(ostream& wy, const Kierownik& s);
-istream& operator>>(istream& we, Kierownik& s);
+//istream& operator>>(istream& we, Kierownik& s);
 

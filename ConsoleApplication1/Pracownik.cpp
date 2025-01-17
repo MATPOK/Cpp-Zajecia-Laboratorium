@@ -83,18 +83,14 @@ int Pracownik::SprawdzNazwisko(const char* por_nazwisko) const
 int Pracownik::Porownaj(const Pracownik& wzorzec) const
 {
 	int wynik = SprawdzNazwisko(wzorzec.Nazwisko());
-	if (wynik != 0) {
-		return wynik;
-	}
+	if (wynik != 0) return wynik;
+
 	wynik = SprawdzImie(wzorzec.Imie());
-	if (wynik != 0) {
-		return wynik;
-	}
-	wynik = m_DataUrodzenia.Porownaj(wzorzec.m_DataUrodzenia);
-	if (wynik != 0) {
-		return wynik;
-	}
+	if (wynik != 0) return wynik;
+
+	return m_DataUrodzenia.Porownaj(wzorzec.m_DataUrodzenia);
 }
+
 void Pracownik::WypiszDane()
 {
 	m_Imie.Wypisz();
@@ -127,16 +123,14 @@ bool Pracownik::operator==(const Pracownik& wzor) const
 int Pracownik::m_NastepneID = 1;
 
 ostream& operator<<(ostream& wy, const Pracownik& p)
-{ 
-	//do zrobienia
-	wy << static_cast<const Pracownik&>(p); // Wywo³anie operatora dla klasy bazowej
-	wy << " Departament: " << p.m_;
+{
+	wy << p.m_Imie << " " << p.m_Nazwisko << " " << p.m_DataUrodzenia << " ID: " << p.m_nIDZatrudnienia;
 	return wy;
 }
 
+
 istream& operator>>(istream& we, Pracownik& p)
 {
-
 	we >> p.m_Imie;
 	we >> p.m_Nazwisko;
 	we >> p.m_DataUrodzenia;

@@ -107,19 +107,50 @@ std::ostream& operator<<(std::ostream& wy, const Napis& p)
     return wy << p.m_pszNapis << endl;
 }
 
+//std::istream& operator>>(std::istream& we, Napis& p)
+//{
+//    char pom[40];
+//    we.get(pom, 40);
+//    p.Ustaw(pom);
+//
+//    while (we && we.peek() != '\n')
+//    {
+//        we.get(pom, 40);
+//        p += pom;
+//    }
+//    we.get(); // '\n'
+//
+//    return we;
+//}
 std::istream& operator>>(std::istream& we, Napis& p)
 {
     char pom[40];
-    we.get(pom, 40);
+    int i = 0;
+
+    // Czyœæ bufor przed u¿yciem
+    memset(pom, 0, sizeof(pom));
+
+    // Ignoruj pocz¹tkowe spacje
+    while (we.peek() == ' ')
+    {
+        we.ignore();
+    }
+
+    // Wczytaj dane pomijaj¹c spacje w œrodku
+    while (we && we.peek() != '\n' && i < 39)
+    {
+        char c = we.get();
+        if (c != ' ') // Pomijaj spacje
+        {
+            pom[i++] = c;
+        }
+    }
+
+    // Ustaw wczytany napis
     p.Ustaw(pom);
 
-    while (we && we.peek() != '\n')
-    {
-        we.get(pom, 40);
-        p += pom;
-    }
-    we.get(); // '\n'
-
+    // Konsumuje koñcowy znak '\n'
+    we.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     return we;
 }

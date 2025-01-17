@@ -131,7 +131,11 @@ ostream& operator<<(ostream& wy, const Data& d)
 std::istream& operator>>(std::istream& we, Data& d)
 {
 	int dd, mm, rr;
-	we >> dd >> mm >> rr;
+    we >> dd;
+    we.ignore(1, '-'); 
+    we >> mm;
+    we.ignore(1, '-'); 
+    we >> rr;
 	d.Ustaw(dd, mm, rr);
     return we;
 }

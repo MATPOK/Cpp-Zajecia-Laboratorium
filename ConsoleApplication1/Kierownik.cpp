@@ -36,10 +36,11 @@ void Kierownik::WypiszDane()
 	cout << "Liczba Pracownikow: " << m_nliczbaPracownikow << endl;
 }
 
-Pracownik* Kierownik::KopiaObiektu() const
-{
-	Pracownik::KopiaObiektu();
-}
+//Pracownik* Kierownik::KopiaObiektu() const
+//{
+//	//Pracownik::KopiaObiektu();
+//	return
+//}
 
 ostream& operator<<(ostream& wy, const Kierownik& s)
 {
@@ -47,7 +48,7 @@ ostream& operator<<(ostream& wy, const Kierownik& s)
 	return wy;
 }
 
-istream& operator>>(istream& we, Kierownik& s)
-{
-	// TODO: tu wstawiæ instrukcjê return
-}
+//istream& operator>>(istream& we, Kierownik& s)
+//{
+//	// TODO: tu wstawiæ instrukcjê return
+//}
