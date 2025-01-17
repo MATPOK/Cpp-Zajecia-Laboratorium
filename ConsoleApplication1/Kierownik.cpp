@@ -1,13 +1,20 @@
 #include "Kierownik.h"
 
+using namespace std;
+
 Kierownik::Kierownik() :m_NazwaDzialu("")
 {
 	m_nliczbaPracownikow = 0;
 }
 
-Kierownik::Kierownik(Kierownik& wzor) :Pracownik(wzor, false), m_nliczbaPracownikow(wzor.m_nliczbaPracownikow)
+Kierownik::Kierownik(Kierownik& wzor) : Pracownik(wzor, false),
+m_NazwaDzialu(wzor.m_NazwaDzialu),
+m_nliczbaPracownikow(wzor.m_nliczbaPracownikow)
 {
 }
+
+
+
 
 Kierownik& Kierownik::operator=(const Kierownik& wzor)
 {
@@ -38,17 +45,25 @@ void Kierownik::WypiszDane()
 
 //Pracownik* Kierownik::KopiaObiektu() const
 //{
-//	//Pracownik::KopiaObiektu();
-//	return
+//	return new Kierownik(*this);
 //}
+
 
 ostream& operator<<(ostream& wy, const Kierownik& s)
 {
-	
+	wy << static_cast<const Pracownik&>(s); // Wywo³anie operatora << klasy bazowej
+	wy << "Nazwa dzialu: " << s.m_NazwaDzialu << endl;
+	wy << "Liczba pracownikow: " << s.m_nliczbaPracownikow << endl;
 	return wy;
 }
 
-//istream& operator>>(istream& we, Kierownik& s)
-//{
-//	// TODO: tu wstawiæ instrukcjê return
-//}
+
+istream& operator>>(istream& we, Kierownik& s)
+{
+	we >> static_cast<Pracownik&>(s); // Wywo³anie operatora >> klasy bazowej
+	we >> s.m_NazwaDzialu;            // Wczytanie nazwy dzia³u
+	we >> s.m_nliczbaPracownikow;     // Wczytanie liczby pracowników
+	return we;
+}
+
+

@@ -21,9 +21,9 @@ public:
 	//virtual Pracownik* KopiaObiektu()const override;
 
 
-	friend ostream& operator<<(ostream& wy, const Pracownik& p);
-	friend istream& operator>>(istream& we, Pracownik& p);
+	friend ostream& operator<<(ostream& wy, const Kierownik& p);
+	friend istream& operator>>(istream& we, Kierownik& p);
 };
 ostream& operator<<(ostream& wy, const Kierownik& s);
-//istream& operator>>(istream& we, Kierownik& s);
+istream& operator>>(istream& we, Kierownik& s);
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "Napis.h"
 #include "Data.h"
+#include "ListaPracownikow.h"
 #include <iostream>
 
 using namespace std;

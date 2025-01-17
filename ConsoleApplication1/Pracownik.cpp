@@ -112,6 +112,7 @@ Pracownik* Pracownik::KopiaObiektu() const
 Pracownik::~Pracownik()
 {
 }
+
 bool Pracownik::operator==(const Pracownik& wzor) const
 {
 	if (this->SprawdzImie(wzor.Imie()) == 0 && this->SprawdzNazwisko(wzor.Nazwisko()) == 0 && m_DataUrodzenia.Porownaj(wzor.m_DataUrodzenia) == 0)
